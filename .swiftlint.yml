@@ -1,0 +1,37 @@
+included:
+  - Todos
+
+excluded: # paths to ignore during linting. overridden by `included`.
+  - Carthage
+  - Pods
+  - External
+  - Submodules
+  - Generated
+  - Core/Model/CoreData
+  - Database/Model
+  - fastlane
+
+# rule parameters
+file_length:
+  - 600 #warning
+  - 800 #error
+
+function_body_length:
+  - 40 #warning
+  - 80 #error
+
+line_length:
+  - 300 #warning
+  - 350 #error
+
+identifier_name:
+  min_length: 2 # only warning
+
+disabled_rules:
+  - trailing_whitespace
+  - cyclomatic_complexity
+  - force_try
+  - force_cast
+  - function_parameter_count
+  - todo
+  - fixme
