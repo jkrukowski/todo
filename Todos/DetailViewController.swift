@@ -29,7 +29,13 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
-        viewModel.load()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isMovingFromParentViewController {
+            viewModel.commit()
+        }
     }
     
     fileprivate func bindViewModel() {
@@ -41,18 +47,13 @@ final class DetailViewController: UIViewController {
                 self.showDatePicker(self.dateTextField)
             }).addDisposableTo(bag)
         
-        viewModel.todo
-            .subscribe(onNext: { [weak self] todo in
-                self?.display(todo: todo)
-            }).addDisposableTo(bag)
+        display(todo: viewModel.todo)
     }
     
-    fileprivate func display(todo: Todo?) {
-        nameTextField.text = todo?.name
-        if let date = todo?.due {
-            dateTextField.text = dateFormatter.string(from: date)
-        }
-        detailsTextView.text = todo?.text ?? ""
+    fileprivate func display(todo: Todo) {
+        nameTextField.text = todo.name
+        dateTextField.text = dateFormatter.string(from: todo.due)
+        detailsTextView.text = todo.text
     }
     
     fileprivate func showDatePicker(_ sender: UITextField) {
@@ -65,6 +66,7 @@ final class DetailViewController: UIViewController {
     }
     
     func datePickerValueChanged(_ sender: UIDatePicker) {
+        viewModel.todo.due = sender.date
         dateTextField.text = dateFormatter.string(from: sender.date)
     }
 }
