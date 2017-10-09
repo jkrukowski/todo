@@ -19,7 +19,7 @@ extension UIAlertController {
         let sortingTitles = getSortTitles(sort)
         let sortingActions = [
             UIAlertAction(title: sortingTitles[0], style: .default) { _ in didTapSort?(.name) },
-            UIAlertAction(title: sortingTitles[1], style: .default) { _ in didTapSort?(.created) },
+            UIAlertAction(title: sortingTitles[1], style: .default) { _ in didTapSort?(.due) },
             UIAlertAction(title: sortingTitles[2], style: .default) { _ in didTapSort?(.priority) }
         ]
         for action in sortingActions {
@@ -32,7 +32,7 @@ extension UIAlertController {
         let tick: String = "\u{2713}"
         let sortingTitles = [
             (NSLocalizedString("Name", comment: "Eng: Name"), SortType.name),
-            (NSLocalizedString("Date", comment: "Eng: Date"), SortType.created),
+            (NSLocalizedString("Date", comment: "Eng: Date"), SortType.due),
             (NSLocalizedString("Priority", comment: "Eng: Priority"), SortType.priority)
         ]
         var result = [String]()

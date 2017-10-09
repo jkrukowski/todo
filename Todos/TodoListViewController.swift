@@ -31,8 +31,7 @@ final class TodoListViewController: UIViewController {
     }
     
     @IBAction func didTapAdd(_ sender: Any) {
-        let todoViewModel = TodoViewModel(todo: nil)
-        let viewController = DetailViewController.instantiate(viewModel: todoViewModel)
+        let viewController = DetailViewController.instantiate()
         navigationController?.pushViewController(viewController, animated: true)
     }
     

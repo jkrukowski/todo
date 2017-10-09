@@ -19,7 +19,7 @@ final class DetailViewController: UIViewController {
     fileprivate var viewModel: TodoViewModelType!
     fileprivate let dateFormatter = DateFormatter()
     
-    static func instantiate(viewModel: TodoViewModelType) -> DetailViewController {
+    static func instantiate(viewModel: TodoViewModelType = TodoViewModel()) -> DetailViewController {
         let storyboard = UIStoryboard(name: "Todo", bundle:nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
         viewController.viewModel = viewModel
@@ -49,7 +49,7 @@ final class DetailViewController: UIViewController {
     
     fileprivate func display(todo: Todo?) {
         nameTextField.text = todo?.name
-        if let date = todo?.created {
+        if let date = todo?.due {
             dateTextField.text = dateFormatter.string(from: date)
         }
         detailsTextView.text = todo?.text ?? ""

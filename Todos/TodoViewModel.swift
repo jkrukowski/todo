@@ -10,17 +10,17 @@ import Foundation
 import RxSwift
 
 protocol TodoViewModelType {
-    var todo: Observable<Todo?> { get }
+    var todo: Observable<Todo> { get }
     func load()
 }
 
 final class TodoViewModel: ViewModel {
-    let todo: Observable<Todo?>
-    fileprivate let todoInput = PublishSubject<Todo?>()
-    fileprivate var loadedTodo: Todo?
+    let todo: Observable<Todo>
+    fileprivate let todoInput = PublishSubject<Todo>()
+    fileprivate var loadedTodo: Todo
     fileprivate let repository: TodoRepositoryType
     
-    init(todo: Todo?, repository: TodoRepositoryType = TodoRepository()) {
+    init(todo: Todo = Todo(), repository: TodoRepositoryType = TodoRepository()) {
         self.loadedTodo = todo
         self.todo = todoInput
         self.repository = repository

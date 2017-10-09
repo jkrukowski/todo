@@ -14,7 +14,7 @@ final class Todo: Object {
     @objc dynamic var name = ""
     @objc dynamic var text = ""
     @objc dynamic var priority = Priority.normal.rawValue
-    @objc dynamic var created = Date()
+    @objc dynamic var due = Date()
     
     override static func primaryKey() -> String? {
         return "id"

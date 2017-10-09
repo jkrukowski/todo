@@ -41,7 +41,7 @@ final class RepositoryTests: BaseTest {
     
     func testSortingDate() {
         let data = BaseTest.insertExampleData(repository)
-        let all = repository.load(sort: .created)
+        let all = repository.load(sort: .due)
         XCTAssertTrue(all[0].id == data[0].id)
     }
     

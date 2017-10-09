@@ -10,10 +10,10 @@ import Foundation
 
 enum SortType: String {
     case name
-    case created
+    case due
     case priority
     
     static var defaultValue: SortType {
-        return .created
+        return .due
     }
 }
