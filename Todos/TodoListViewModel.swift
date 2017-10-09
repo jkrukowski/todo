@@ -23,7 +23,7 @@ final class TodoListViewModel: ViewModel {
     fileprivate let repository: TodoRepositoryType
     fileprivate var sort: SortType = .defaultValue
     
-    init(repository: TodoRepositoryType) {
+    init(repository: TodoRepositoryType = TodoRepository()) {
         self.todos = todosInput
         self.repository = repository
         super.init()

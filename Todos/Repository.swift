@@ -19,7 +19,7 @@ protocol TodoRepositoryType {
 
 final class TodoRepository {
     let db: Realm
-    init(db: Realm) {
+    init(db: Realm = try! Realm()) {
         self.db = db
     }
 }
