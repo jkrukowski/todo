@@ -7,8 +7,6 @@
 //
 
 import Foundation
-
-import Foundation
 import RxSwift
 import RxCocoa
 import UIKit
@@ -50,6 +48,12 @@ final class TodoListViewController: UIViewController {
                 cell.configure(model: model)
             }.addDisposableTo(bag)
         
+        tableView.rx
+            .itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.didTapCell(indexPath.row)
+            }).addDisposableTo(bag)
+        
         searchBar.rx
             .text
             .orEmpty
@@ -58,5 +62,10 @@ final class TodoListViewController: UIViewController {
             .subscribe(onNext: { [weak self] name in
                 self?.viewModel.filter(name: name)
             }).addDisposableTo(bag)
+    }
+    
+    fileprivate func didTapCell(_ row: Int) {
+        let viewController = DetailViewController.instantiate()
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
