@@ -16,6 +16,7 @@ protocol TodoListViewModelType {
     func filter(name: String)
     func add(todo: Todo)
     func remove(todo: Todo)
+    func get(byIndex index: Int) -> Todo
 }
 
 final class TodoListViewModel: ViewModel {
@@ -23,6 +24,7 @@ final class TodoListViewModel: ViewModel {
     fileprivate(set) var sort: SortType = .defaultValue
     fileprivate let todosInput = PublishSubject<[Todo]>()
     fileprivate let repository: TodoRepositoryType
+    fileprivate var loadedTodos = [Todo]()
     
     init(repository: TodoRepositoryType = TodoRepository()) {
         self.todos = todosInput
@@ -34,11 +36,13 @@ final class TodoListViewModel: ViewModel {
 extension TodoListViewModel: TodoListViewModelType {
     func load(sort: SortType) {
         self.sort = sort
-        todosInput.onNext(repository.load(sort: sort))
+        self.loadedTodos = repository.load(sort: sort)
+        todosInput.onNext(loadedTodos)
     }
     func filter(name: String) {
         let predicate = NSPredicate(format: "name BEGINSWITH[c] %@", name)
-        todosInput.onNext(repository.load(predicate: predicate, sort: self.sort))
+        self.loadedTodos = repository.load(predicate: predicate, sort: self.sort)
+        todosInput.onNext(loadedTodos)
     }
     func add(todo: Todo) {
         repository.add(todo: todo)
@@ -47,5 +51,8 @@ extension TodoListViewModel: TodoListViewModelType {
     func remove(todo: Todo) {
         repository.remove(todo: todo)
         load(sort: self.sort)
+    }
+    func get(byIndex index: Int) -> Todo {
+        return loadedTodos[index]
     }
 }

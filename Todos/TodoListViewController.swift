@@ -31,6 +31,9 @@ final class TodoListViewController: UIViewController {
     }
     
     @IBAction func didTapAdd(_ sender: Any) {
+        let todoViewModel = TodoViewModel(todo: nil)
+        let viewController = DetailViewController.instantiate(viewModel: todoViewModel)
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     @IBAction func didTapSort(_ sender: Any) {
@@ -65,7 +68,8 @@ final class TodoListViewController: UIViewController {
     }
     
     fileprivate func didTapCell(_ row: Int) {
-        let viewController = DetailViewController.instantiate()
+        let todoViewModel = TodoViewModel(todo: viewModel.get(byIndex: row))
+        let viewController = DetailViewController.instantiate(viewModel: todoViewModel)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
