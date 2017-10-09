@@ -23,6 +23,8 @@
 		641CDD9D1F8BC22A0027EF51 /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641CDD9C1F8BC22A0027EF51 /* TodoListViewController.swift */; };
 		641CDD9F1F8BC2FA0027EF51 /* Todo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 641CDD9E1F8BC2FA0027EF51 /* Todo.storyboard */; };
 		641CDDA11F8BC4140027EF51 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641CDDA01F8BC4140027EF51 /* App.swift */; };
+		641CDDA41F8BCA740027EF51 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641CDDA31F8BCA740027EF51 /* TodoTableViewCell.swift */; };
+		641CDDA71F8BD4860027EF51 /* UIAlertControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641CDDA61F8BD4860027EF51 /* UIAlertControllerExt.swift */; };
 		A9DD08632462ECAF407E194B /* Pods_Todos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FFE8579E5EC0AE9C696B56F /* Pods_Todos.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,8 @@
 		641CDD9C1F8BC22A0027EF51 /* TodoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		641CDD9E1F8BC2FA0027EF51 /* Todo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Todo.storyboard; sourceTree = "<group>"; };
 		641CDDA01F8BC4140027EF51 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		641CDDA31F8BCA740027EF51 /* TodoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
+		641CDDA61F8BD4860027EF51 /* UIAlertControllerExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExt.swift; sourceTree = "<group>"; };
 		713463EFD49376DE0D4F47CD /* Pods-Todos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todos.release.xcconfig"; path = "Pods/Target Support Files/Pods-Todos/Pods-Todos.release.xcconfig"; sourceTree = "<group>"; };
 		A7C67329E4A75387C30B71F2 /* Pods-TodosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodosTests/Pods-TodosTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D4F31E6A0B7923E3DC16718B /* Pods_TodosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +131,8 @@
 		641CDD631F8B77090027EF51 /* Todos */ = {
 			isa = PBXGroup;
 			children = (
+				641CDDA51F8BD4760027EF51 /* Utils */,
+				641CDDA21F8BCA1B0027EF51 /* Views */,
 				641CDD9B1F8BC1F60027EF51 /* ViewControllers */,
 				641CDD9A1F8BC1DC0027EF51 /* Storyboards */,
 				641CDD901F8B9EF60027EF51 /* Repository */,
@@ -193,6 +199,22 @@
 				641CDD9C1F8BC22A0027EF51 /* TodoListViewController.swift */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		641CDDA21F8BCA1B0027EF51 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				641CDDA31F8BCA740027EF51 /* TodoTableViewCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		641CDDA51F8BD4760027EF51 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				641CDDA61F8BD4860027EF51 /* UIAlertControllerExt.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -414,7 +436,9 @@
 				641CDDA11F8BC4140027EF51 /* App.swift in Sources */,
 				641CDD9D1F8BC22A0027EF51 /* TodoListViewController.swift in Sources */,
 				641CDD861F8B80380027EF51 /* Todo.swift in Sources */,
+				641CDDA41F8BCA740027EF51 /* TodoTableViewCell.swift in Sources */,
 				641CDD651F8B77090027EF51 /* AppDelegate.swift in Sources */,
+				641CDDA71F8BD4860027EF51 /* UIAlertControllerExt.swift in Sources */,
 				641CDD921F8B9F020027EF51 /* Repository.swift in Sources */,
 				641CDD881F8B825A0027EF51 /* Priority.swift in Sources */,
 				641CDD8F1F8B9B0C0027EF51 /* Sort.swift in Sources */,

@@ -11,6 +11,7 @@ import RxSwift
 
 protocol TodoListViewModelType {
     var todos: Observable<[Todo]> { get }
+    var sort: SortType { get }
     func load(sort: SortType)
     func filter(name: String)
     func add(todo: Todo)
@@ -19,9 +20,9 @@ protocol TodoListViewModelType {
 
 final class TodoListViewModel: ViewModel {
     let todos: Observable<[Todo]>
+    fileprivate(set) var sort: SortType = .defaultValue
     fileprivate let todosInput = PublishSubject<[Todo]>()
     fileprivate let repository: TodoRepositoryType
-    fileprivate var sort: SortType = .defaultValue
     
     init(repository: TodoRepositoryType = TodoRepository()) {
         self.todos = todosInput
@@ -36,7 +37,7 @@ extension TodoListViewModel: TodoListViewModelType {
         todosInput.onNext(repository.load(sort: sort))
     }
     func filter(name: String) {
-        let predicate = NSPredicate(format: "name BEGINSWITH %@", name)
+        let predicate = NSPredicate(format: "name BEGINSWITH[c] %@", name)
         todosInput.onNext(repository.load(predicate: predicate, sort: self.sort))
     }
     func add(todo: Todo) {
