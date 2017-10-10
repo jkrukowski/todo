@@ -31,7 +31,7 @@ final class TodoListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.load(sort: .defaultValue)
+        viewModel.load()
     }
     
     @IBAction func didTapAdd(_ sender: Any) {
@@ -60,6 +60,12 @@ final class TodoListViewController: UIViewController {
                 self?.didTapCell(indexPath.row)
             }).addDisposableTo(bag)
         
+        tableView.rx
+            .itemDeleted
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.didDeleteCell(indexPath.row)
+            }).addDisposableTo(bag)
+        
         searchBar.rx
             .text
             .orEmpty
@@ -68,6 +74,10 @@ final class TodoListViewController: UIViewController {
             .subscribe(onNext: { [weak self] name in
                 self?.viewModel.filter(name: name)
             }).addDisposableTo(bag)
+    }
+    
+    fileprivate func didDeleteCell(_ row: Int) {
+        viewModel.remove(todo: viewModel.get(byIndex: row))
     }
     
     fileprivate func didTapCell(_ row: Int) {

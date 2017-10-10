@@ -12,6 +12,7 @@ import RxSwift
 protocol TodoListViewModelType {
     var todos: Observable<[Todo]> { get }
     var sort: SortType { get }
+    func load()
     func load(sort: SortType)
     func filter(name: String)
     func add(todo: Todo)
@@ -34,6 +35,9 @@ final class TodoListViewModel: ViewModel {
 }
 
 extension TodoListViewModel: TodoListViewModelType {
+    func load() {
+        load(sort: sort)
+    }
     func load(sort: SortType) {
         self.sort = sort
         self.loadedTodos = repository.load(sort: sort)
