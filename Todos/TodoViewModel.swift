@@ -10,12 +10,12 @@ import Foundation
 import RxSwift
 
 protocol TodoViewModelType {
-    var todo: Todo { get }
+    var todo: Todo { get set }
     func commit()
 }
 
 final class TodoViewModel: ViewModel {
-    let todo: Todo
+    var todo: Todo
     fileprivate let repository: TodoRepositoryType
     
     init(todo: Todo = Todo(), repository: TodoRepositoryType = TodoRepository()) {

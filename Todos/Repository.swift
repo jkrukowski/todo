@@ -26,18 +26,24 @@ final class TodoRepository {
 
 extension TodoRepository: TodoRepositoryType {
     func load(sort: SortType) -> [Todo] {
-        return Array(db.objects(Todo.self).sorted(byKeyPath: sort.rawValue))
+        return db.objects(TodoDbObject.self)
+            .sorted(byKeyPath: sort.rawValue)
+            .map(Todo.init)
     }
     func load(predicate: NSPredicate, sort: SortType) -> [Todo] {
-        return Array(db.objects(Todo.self).filter(predicate).sorted(byKeyPath: sort.rawValue))
+        return db.objects(TodoDbObject.self)
+            .filter(predicate)
+            .sorted(byKeyPath: sort.rawValue)
+            .map(Todo.init)
     }
     func add(todo: Todo) {
         try! db.write {
-            db.create(Todo.self, value: todo, update: true)
+            let dbObject = TodoDbObject(model: todo)
+            db.create(TodoDbObject.self, value: dbObject, update: true)
         }
     }
     func remove(todo: Todo) {
-        guard let item = db.object(ofType: Todo.self, forPrimaryKey: todo.id) else {
+        guard let item = db.object(ofType: TodoDbObject.self, forPrimaryKey: todo.id) else {
             return
         }
         try! db.write {

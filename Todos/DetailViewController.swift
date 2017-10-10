@@ -14,7 +14,8 @@ import UIKit
 final class DetailViewController: UIViewController {
     @IBOutlet var dateTextField: UITextField!
     @IBOutlet var nameTextField: UITextField!
-    @IBOutlet var detailsTextView: UITextView!
+    @IBOutlet var detailsTextField: UITextField!
+    @IBOutlet var prioritySegment: UISegmentedControl!
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: TodoViewModelType!
     fileprivate let dateFormatter = DateFormatter()
@@ -34,6 +35,9 @@ final class DetailViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if isMovingFromParentViewController {
+            update(name: nameTextField.text,
+                   text: detailsTextField.text,
+                   priority: prioritySegment.selectedSegmentIndex)
             viewModel.commit()
         }
     }
@@ -44,22 +48,33 @@ final class DetailViewController: UIViewController {
         dateTextField.rx
             .controlEvent(.editingDidBegin)
             .bind(onNext: { [unowned self] in
-                self.showDatePicker(self.dateTextField)
+                self.showDatePicker()
             }).addDisposableTo(bag)
         
         display(todo: viewModel.todo)
     }
     
-    fileprivate func display(todo: Todo) {
-        nameTextField.text = todo.name
-        dateTextField.text = dateFormatter.string(from: todo.due)
-        detailsTextView.text = todo.text
+    fileprivate func update(name: String?, text: String?, priority: Int) {
+        viewModel.todo.name = name ?? ""
+        viewModel.todo.text = text ?? ""
+        viewModel.todo.priority = Priority(rawValue: priority)!
     }
     
-    fileprivate func showDatePicker(_ sender: UITextField) {
+    fileprivate func display(todo: Todo) {
+        nameTextField.text = todo.name
+        if let date = todo.due {
+            dateTextField.text = dateFormatter.string(from: date)
+        } else {
+            dateTextField.text = ""
+        }
+        detailsTextField.text = todo.text
+        prioritySegment.selectedSegmentIndex = todo.priority.rawValue
+    }
+    
+    fileprivate func showDatePicker() {
         let datePickerView = UIDatePicker()
         datePickerView.datePickerMode = UIDatePickerMode.date
-        sender.inputView = datePickerView
+        dateTextField.inputView = datePickerView
         datePickerView.addTarget(self,
                                  action: #selector(DetailViewController.datePickerValueChanged),
                                  for: .valueChanged)

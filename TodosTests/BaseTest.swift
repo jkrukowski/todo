@@ -22,11 +22,17 @@ class BaseTest: XCTestCase {
         self.realm = try! Realm(configuration: Realm.Configuration(inMemoryIdentifier: self.name))
     }
     
+    static func todo(withName name: String) -> Todo {
+        var todo = Todo()
+        todo.name = name
+        return todo
+    }
+    
     static func insertExampleData(_ repository: TodoRepositoryType) -> [Todo] {
         let todos = [
-            Todo(value: ["name": "ab"]),
-            Todo(value: ["name": "aa"]),
-            Todo(value: ["name": "ca"])
+            todo(withName: "ab"),
+            todo(withName: "aa"),
+            todo(withName: "ca")
         ]
         for i in todos {
             repository.add(todo: i)
