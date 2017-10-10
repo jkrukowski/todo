@@ -27,6 +27,8 @@ final class TodoViewModel: ViewModel {
 
 extension TodoViewModel: TodoViewModelType {
     func commit() {
-        repository.add(todo: todo)
+        if !todo.isEmpty {
+            repository.add(todo: todo)
+        }
     }
 }

@@ -35,6 +35,7 @@ final class TodoListViewController: UIViewController {
     }
     
     @IBAction func didTapAdd(_ sender: Any) {
+        searchBar.resignFirstResponder()
         let viewController = DetailViewController.instantiate()
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -81,6 +82,7 @@ final class TodoListViewController: UIViewController {
     }
     
     fileprivate func didTapCell(_ row: Int) {
+        searchBar.resignFirstResponder()
         let todoViewModel = TodoViewModel(todo: viewModel.get(byIndex: row))
         let viewController = DetailViewController.instantiate(viewModel: todoViewModel)
         navigationController?.pushViewController(viewController, animated: true)

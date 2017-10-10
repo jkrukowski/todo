@@ -48,6 +48,13 @@ struct Todo {
         self.priority = .normal
         self.due = nil
     }
+    
+    var isEmpty: Bool {
+        return name.isEmpty &&
+            text.isEmpty &&
+            priority == .normal &&
+            due == nil
+    }
 }
 
 extension Todo {

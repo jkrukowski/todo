@@ -36,4 +36,12 @@ final class TodoViewModelTests: BaseTest {
         viewModel = TodoViewModel(todo: data[0], repository: repository)
         XCTAssertTrue(data[0] == viewModel.todo)
     }
+    
+    func testDoNotAddEmpty() {
+        viewModel = TodoViewModel(todo: Todo(), repository: repository)
+        XCTAssertTrue(viewModel.todo.isEmpty)
+        viewModel.commit()
+        let all = repository.load(sort: .defaultValue)
+        XCTAssertTrue(all.isEmpty)
+    }
 }
