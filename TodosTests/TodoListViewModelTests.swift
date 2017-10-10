@@ -76,4 +76,18 @@ final class TodoListViewModelTests: BaseTest {
         viewModel.remove(todo: todo)
         waitForExpectations(timeout: 5, handler: nil)
     }
+    
+    func testSort() {
+        XCTAssertTrue(viewModel.sort == SortType.defaultValue)
+        let sort = SortType.name
+        viewModel.load(sort: sort)
+        XCTAssertTrue(viewModel.sort == sort)
+    }
+    
+    func testGetByIndexOk() {
+        let todo = Todo()
+        repository.add(todo: todo)
+        viewModel.load()
+        XCTAssertTrue(viewModel.get(byIndex: 0) == todo)
+    }
 }

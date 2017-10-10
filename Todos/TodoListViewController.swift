@@ -48,7 +48,7 @@ final class TodoListViewController: UIViewController {
     
     fileprivate func bindViewModel() {
         tableView.tableFooterView = UIView(frame: CGRect.zero)
-        tableView.rowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
         viewModel.todos
             .bind(to: tableView.rx.items(cellIdentifier: TodoTableViewCell.id, cellType: TodoTableViewCell.self)) { _, model, cell in
                 cell.configure(model: model)

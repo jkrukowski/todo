@@ -59,3 +59,9 @@ extension Todo {
         self.due = model.due
     }
 }
+
+extension Todo: Equatable {
+    static func == (lhs: Todo, rhs: Todo) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
